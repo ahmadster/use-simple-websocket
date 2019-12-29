@@ -1,6 +1,6 @@
 {
   "name": "use-simple-websocket",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "React Hooks Websocket Hook",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ahmadster/useWS.git"
+    "url": "git+https://github.com/ahmadster/use-simple-websocket.git"
   },
   "keywords": [
     "react",
@@ -19,9 +19,9 @@
   "author": "Ahmad Baitalmal <ahmad@baitalmal.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ahmadster/useWS/issues"
+    "url": "https://github.com/ahmadster/use-simple-websocket/issues"
   },
-  "homepage": "https://github.com/ahmadster/useWS#readme",
+  "homepage": "https://github.com/ahmadster/use-simple-websocket#readme",
   "dependencies": {
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
