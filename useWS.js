@@ -42,7 +42,7 @@ export const useWS = (handleMessage, options = {}) => {
 			wsURL = _options.wsURL
 		}
 		setStatus(`connecting`)
-		if (_options.debugMode) {
+		if (_options.debugMode === true) {
 			console.info(`[useWS] --> ${wsURL}`)
 		}
 		// retry if we can't connect
@@ -51,7 +51,7 @@ export const useWS = (handleMessage, options = {}) => {
 		_ws.sendJson = data => _ws.send(JSON.stringify(data))
 		_ws.onopen = () => {
 			clearTimeout(onOpenTimeout)
-			if (_options.debugMode) {
+			if (_options.debugMode === true) {
 				console.info(`[useWS] connected`)
 			}
 			setStatus(`connected`)
@@ -65,13 +65,17 @@ export const useWS = (handleMessage, options = {}) => {
 			if (heartBeatInterval.current) {
 				clearInterval(heartBeatInterval.current)
 			}
+			if (typeof _options.onMessage === `function`) {
+				// onMessage taking care of pings and pongs
+				return
+			}
 			heartBeatInterval.current = setInterval(() => {
-				if (_options.debugMode) {
+				if (_options.debugMode === true) {
 					console.debug(`[useWS] heartbeat`, missedHeartBeats.current)
 				}
 				try {
 					if (missedHeartBeats.current >= _options.maxMissedHeartbeats) {
-						if (_options.debugMode) {
+						if (_options.debugMode === true) {
 							console.error(`[useWS] missed more than ${_options.maxMissedHeartbeats} heartbeats, closing...`)
 						}
 						_ws.close()
@@ -84,7 +88,7 @@ export const useWS = (handleMessage, options = {}) => {
 			}, _options.pingDelay)
 		}
 		_ws.onclose = () => {
-			if (_options.debugMode) {
+			if (_options.debugMode === true) {
 				console.error(`[useWS] disconnected`)
 			}
 			setStatus(`disconnected`)
@@ -101,7 +105,7 @@ export const useWS = (handleMessage, options = {}) => {
 			setTimeout(reconnect, _options.reconnectDelay)
 		}
 		_ws.onerror = e => {
-			if (_options.debugMode) {
+			if (_options.debugMode === true) {
 				console.error(`[useWS] disconnected`, e)
 			}
 			setStatus(`disconnected`)
@@ -122,7 +126,7 @@ export const useWS = (handleMessage, options = {}) => {
 				if (msg.re === `pong`) {
 					missedHeartBeats.current = missedHeartBeats - 1
 					if (missedHeartBeats.current > 0) {
-						if (_options.debugMode) {
+						if (_options.debugMode === true) {
 							console.warn(`[useWS] missed ${missedHeartBeats.current} (${_options.maxMissedHeartbeats} max) heartbeats.`)
 						}
 					}

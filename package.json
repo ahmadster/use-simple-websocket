@@ -1,6 +1,6 @@
 {
   "name": "use-simple-websocket",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "React Hooks Websocket Hook",
   "main": "index.js",
   "scripts": {
