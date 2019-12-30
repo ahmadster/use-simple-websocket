@@ -102,6 +102,7 @@ You can override this by passing a URL string or a function that returns a URL s
 ```
 
 ```javascript
+  const myURL = () => {return `ws://my.server.com/my/endpoint`} 
   const [ws, wsStatus] = useWS(handleMessage,{ wsURL: myURL })
 ```
 
