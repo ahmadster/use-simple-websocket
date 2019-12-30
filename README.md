@@ -32,6 +32,13 @@ export default function App() {
 
 ```
 
+## Sending Messages
+The returned websocket object is the built-in browser websocket object.
+So you have access to the the full standard
+[WebSocket API](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket).
+
+`sendJson` is added for convenience and it applies `JSON.stringify` on the 
+payload you pass in and then calls `ws.send`. 
 
 ## Customizing
 See more details below.
